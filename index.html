@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Resistores</title>
+    <!-- Inclua o Vue.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.min.js"></script>
+    <!-- Inclua o CSS -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="app" class="container">
+        <!-- Seletor de Idioma -->
+        <div class="language-selector">
+            <img src="./img/brasil.png" alt="Português" @click="changeLanguage('pt')">
+            <img src="./img/estados-unidos.png" alt="English" @click="changeLanguage('en')">
+            <img src="./img/argentina.png" alt="Español" @click="changeLanguage('es')">
+        </div>
+
+        <div class="header">
+            <h1>{{ t('title') }}</h1>
+            <p>{{ t('subtitle') }}</p>
+        </div>
+
+        <div class="tabs">
+            <button 
+                v-for="bands in [3,4,5,6]" 
+                :key="bands"
+                @click="selectedBands = bands"
+                :class="['tab', selectedBands === bands ? 'active' : '']">
+                {{ bands }} {{ t('bandsLabel') }}
+            </button>
+        </div>
+
+        <div class="calculator">
+            <svg class="resistor-display" viewBox="0 0 600 150">
+                <line x1="100" y1="75" x2="150" y2="75" stroke="#333" stroke-width="4"/>
+                <line x1="450" y1="75" x2="500" y2="75" stroke="#333" stroke-width="4"/>
+                
+                <path d="M150,35 
+                         L180,35 
+                         L200,45
+                         L400,45
+                         L420,35
+                         L450,35
+                         C460,35 460,115 450,115
+                         L420,115
+                         L400,105
+                         L200,105
+                         L180,115
+                         L150,115
+                         C140,115 140,35 150,35
+                         Z" 
+                      fill="beige" 
+                      stroke="#333"/>
+                
+                <path v-for="(band, index) in displayBands" 
+                      :key="index"
+                      :d="band.path"
+                      :fill="band.color"/>
+            </svg>
+
+            <div class="band-selector">
+                <div v-for="(band, index) in bands" :key="index" class="color-picker">
+                    <div class="color-button" @click="toggleColorOptions(band)">
+                        <div class="color-square" :style="{ backgroundColor: colorCodes[band.color] }"></div>
+                        <span>{{ t('colors')[band.color] }}</span>
+                    </div>
+                    <div class="color-options" v-if="band.showOptions">
+                        <div v-for="(value, color) in colorValues" 
+                             :key="color"
+                             class="color-option"
+                             @click="selectColor(band, color)">
+                            <div class="color-square" :style="{ backgroundColor: colorCodes[color] }"></div>
+                            <span>{{ t('colors')[color] }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result">
+                {{ t('valueLabel') }}: {{ resistorValue }} Ω ±{{ tolerance }}%
+            </div>
+
+            <div class="inverse-calculator">
+                <h3>{{ t('inverseCalculatorTitle') }}</h3>
+                <input type="number" v-model="targetValue" :placeholder="t('enterValue')">
+                <button @click="calculateInverse">{{ t('calculateButton') }}</button>
+                <div class="inverse-results" v-if="inverseResults && inverseResults.length">
+                    <div v-for="result in inverseResults" :key="result.bands" class="inverse-result-item">
+                        <h4>{{ result.bands }} {{ t('bandsLabel') }}</h4>
+                        <svg class="resistor-display" viewBox="0 0 400 150">
+                            <line x1="50" y1="75" x2="100" y2="75" stroke="#333" stroke-width="3"/>
+                            <line x1="300" y1="75" x2="350" y2="75" stroke="#333" stroke-width="3"/>
+                            
+                            <path d="M100,35 
+                                    L120,35 
+                                    L140,45
+                                    L260,45
+                                    L280,35
+                                    L300,35
+                                    C310,35 310,115 300,115
+                                    L280,115
+                                    L260,105
+                                    L140,105
+                                    L120,115
+                                    L100,115
+                                    C90,115 90,35 100,35
+                                    Z" 
+                                fill="beige" 
+                                stroke="#333"/>
+                            
+                            <path v-for="(color, index) in result.colors" 
+                                :key="index"
+                                :d="getBandPath(result.colors.length, index)"
+                                :fill="colorCodes[color]"/>
+                        </svg>
+                        <div class="colors-list">
+                            <div v-for="(color, index) in result.colors" :key="index" class="color-item">
+                                <div class="color-square" :style="{ backgroundColor: colorCodes[color] }"></div>
+                                <span>{{ t('colors')[color] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Inclua o script -->
+    <script src="./script.js"></script>
+</body>
+</html>
