@@ -125,6 +125,34 @@ const app = new Vue({
                     'Branco': 'Blanco',
                     'Dourado': 'Dorado',
                     'Prata': 'Plateado'
+                    
+                }
+            },
+
+            de: {
+                title: 'Widerstandsrechner',
+                subtitle: 'Wählen Sie die Anzahl der Bänder und Farben, um den Widerstandswert zu berechnen',
+                bandsLabel: 'Bänder',
+                valueLabel: 'Wert',
+                inverseCalculatorTitle: 'Umgekehrter Rechner',
+                enterValue: 'Wert in Ohm',
+                calculateButton: 'Berechnen',
+                toleranceLabel: 'Toleranz',
+                pleaseEnterValidValue: 'Bitte geben Sie einen gültigen Wert ein',
+                colors: {
+                    'Preto': 'Schwarz',
+                    'Marrom': 'Braun',
+                    'Vermelho': 'Rot',
+                    'Laranja': 'Orange',
+                    'Amarelo': 'Gelb',
+                    'Verde': 'Grün',
+                    'Azul': 'Blau',
+                    'Violeta': 'Violett',
+                    'Cinza': 'Grau',
+                    'Branco': 'Weiß',
+                    'Dourado': 'Gold',
+                    'Prata': 'Silber'
+
                 }
             }
         }
