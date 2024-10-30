@@ -50,117 +50,12 @@ const app = new Vue({
         },
         targetValue: '',
         inverseResult: '',
-        inverseResults: null,
-        translations: {
-            pt: {
-                title: 'Calculadora de Resistores',
-                subtitle: 'Selecione o número de faixas e as cores para calcular o valor do resistor',
-                bandsLabel: 'Faixas',
-                valueLabel: 'Valor',
-                inverseCalculatorTitle: 'Calculadora Inversa',
-                enterValue: 'Valor em Ohms',
-                calculateButton: 'Calcular',
-                toleranceLabel: 'Tolerância',
-                pleaseEnterValidValue: 'Por favor, insira um valor válido',
-                colors: {
-                    'Preto': 'Preto',
-                    'Marrom': 'Marrom',
-                    'Vermelho': 'Vermelho',
-                    'Laranja': 'Laranja',
-                    'Amarelo': 'Amarelo',
-                    'Verde': 'Verde',
-                    'Azul': 'Azul',
-                    'Violeta': 'Violeta',
-                    'Cinza': 'Cinza',
-                    'Branco': 'Branco',
-                    'Dourado': 'Dourado',
-                    'Prata': 'Prata'
-                }
-            },
-            en: {
-                title: 'Resistor Calculator',
-                subtitle: 'Select the number of bands and colors to calculate the resistor value',
-                bandsLabel: 'Bands',
-                valueLabel: 'Value',
-                inverseCalculatorTitle: 'Inverse Calculator',
-                enterValue: 'Value in Ohms',
-                calculateButton: 'Calculate',
-                toleranceLabel: 'Tolerance',
-                pleaseEnterValidValue: 'Please enter a valid value',
-                colors: {
-                    'Preto': 'Black',
-                    'Marrom': 'Brown',
-                    'Vermelho': 'Red',
-                    'Laranja': 'Orange',
-                    'Amarelo': 'Yellow',
-                    'Verde': 'Green',
-                    'Azul': 'Blue',
-                    'Violeta': 'Violet',
-                    'Cinza': 'Gray',
-                    'Branco': 'White',
-                    'Dourado': 'Gold',
-                    'Prata': 'Silver'
-                }
-            },
-            es: {
-                title: 'Calculadora de Resistencias',
-                subtitle: 'Seleccione el número de bandas y colores para calcular el valor de la resistencia',
-                bandsLabel: 'Bandas',
-                valueLabel: 'Valor',
-                inverseCalculatorTitle: 'Calculadora Inversa',
-                enterValue: 'Valor en Ohmios',
-                calculateButton: 'Calcular',
-                toleranceLabel: 'Tolerancia',
-                pleaseEnterValidValue: 'Por favor, ingrese un valor válido',
-                colors: {
-                    'Preto': 'Negro',
-                    'Marrom': 'Marrón',
-                    'Vermelho': 'Rojo',
-                    'Laranja': 'Naranja',
-                    'Amarelo': 'Amarillo',
-                    'Verde': 'Verde',
-                    'Azul': 'Azul',
-                    'Violeta': 'Violeta',
-                    'Cinza': 'Gris',
-                    'Branco': 'Blanco',
-                    'Dourado': 'Dorado',
-                    'Prata': 'Plateado'
-                    
-                }
-            },
-
-            de: {
-                title: 'Widerstandsrechner',
-                subtitle: 'Wählen Sie die Anzahl der Bänder und Farben, um den Widerstandswert zu berechnen',
-                bandsLabel: 'Bänder',
-                valueLabel: 'Wert',
-                inverseCalculatorTitle: 'Umgekehrter Rechner',
-                enterValue: 'Wert in Ohm',
-                calculateButton: 'Berechnen',
-                toleranceLabel: 'Toleranz',
-                pleaseEnterValidValue: 'Bitte geben Sie einen gültigen Wert ein',
-                colors: {
-                    'Preto': 'Schwarz',
-                    'Marrom': 'Braun',
-                    'Vermelho': 'Rot',
-                    'Laranja': 'Orange',
-                    'Amarelo': 'Gelb',
-                    'Verde': 'Grün',
-                    'Azul': 'Blau',
-                    'Violeta': 'Violett',
-                    'Cinza': 'Grau',
-                    'Branco': 'Weiß',
-                    'Dourado': 'Gold',
-                    'Prata': 'Silber'
-
-                }
-            }
-        }
+        inverseResults: null
     },
     computed: {
         t() {
             return (key) => {
-                return this.translations[this.currentLanguage][key] || key;
+                return translations[this.currentLanguage][key] || key;
             };
         },
         displayBands() {
@@ -246,7 +141,7 @@ const app = new Vue({
             }
 
             let allResults = [];
-            for (let bandCount of [3,4,5,6]) {
+            for (let bandCount of [3, 4, 5, 6]) {
                 let result = this.calculateBandsForValue(value, bandCount);
                 if (result) {
                     allResults.push({
