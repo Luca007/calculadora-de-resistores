@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div id="app" class="container">
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+    <div id="app" class="container" style="display: none;">
         <!-- Seletor de Idioma -->
         <div class="language-selector">
             <img src="./img/brasil.png" alt="Português" @click="changeLanguage('pt')">
