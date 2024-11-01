@@ -22,7 +22,7 @@ body {
 }
 
 .language-selector img {
-    width: 6%;
+    width: 7dvw;
     height: auto;
     cursor: pointer;
     transition: transform 0.2s;
@@ -280,6 +280,13 @@ body {
         width: 100%;
         max-width: 300px;
         margin: 5px 0;
+    }
+    .language-selector {
+        gap: 8%;
+    }
+    
+    .language-selector img {
+        width: 17%;
     }
 }
 
